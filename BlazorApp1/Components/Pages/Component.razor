@@ -6,7 +6,7 @@
 <input type="text" @bind="j" @onkeypress="onkeypress" />
 <button @onclick="fire">fire </button>
 <button @onclick = "face">face</button>
-
+<button @onclick = "repair">repair</button>
 
 
 
@@ -21,6 +21,10 @@
 @code {
 
     string j = "";
+    async void repair()
+    {
+        await actions.RepairShipAsync();
+    }
     async void face()
     {
         await actions.faceNearestPlayer();
