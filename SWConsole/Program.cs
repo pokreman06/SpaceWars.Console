@@ -5,14 +5,10 @@ namespace SpaceWarsServices;
 
 class Program
 {
+
     int loc;
     static async Task Main(string[] args)
     {
-        //**************************************************************************************
-        //***  |    |    |    |                                            |    |    |    |    |
-        //***  |    |    |    |       Change your key mappings here        |    |    |    |    |
-        //***  V    V    V    V                                            V    V    V    V    V
-        //**************************************************************************************
         const ConsoleKey forwardKey = ConsoleKey.UpArrow;
         const ConsoleKey leftKey = ConsoleKey.LeftArrow;
         const ConsoleKey rightKey = ConsoleKey.RightArrow;
@@ -26,6 +22,11 @@ class Program
         const ConsoleKey powerfist = ConsoleKey.Z;
         const ConsoleKey railgun = ConsoleKey.X;
 
+        //**************************************************************************************
+        //***  |    |    |    |                                            |    |    |    |    |
+        //***  |    |    |    |       Change your key mappings here        |    |    |    |    |
+        //***  V    V    V    V                                            V    V    V    V    V
+        //**************************************************************************************
         Uri baseAddress = getApiBaseAddress(args);
         
         bool exitGame = false;

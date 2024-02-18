@@ -5,6 +5,8 @@
 <h3>ui</h3>
 
 
+<button @onclick = "face">face</button>
+
 
 
 
@@ -17,7 +19,57 @@
 
 
 @code {
-    
+
+    string j = "";
+    async void face()
+    {
+        await actions.faceNearestPlayer();
+    }
+    async void fire()
+    {
+        await actions.FireWeaponAsync(true);
+    }
+    async void onkeypress()
+    {
+        if(j!="")
+        {
+            char i = j[0];
+            j = "";
+            if (i == 'a')
+            {
+                await actions.RotateRightAsync(false);
+            }
+            else if (i == 'A')
+            {
+                await actions.RotateRightAsync(true);
+            }
+            else if (i == 'd')
+            {
+                await actions.RotateLeftAsync(false);
+            }
+            else if (i == 'D')
+            {
+                await actions.RotateLeftAsync(true);
+            }
+            else if (i == 'w')
+            {
+                await actions.MoveForwardAsync(false);
+            }
+            else if (i == 'W')
+            {
+                await actions.MoveForwardAsync(true);
+            }
+            else if (i == 'z'||i=='Z')
+            {
+                await actions.PurchasePowerFistAsync();
+            }
+            else if (i == 'x' || i == 'X')
+            {
+                await actions.PurchaseRailGunAsync();
+            }
+        }
+
+    }
     protected override async Task OnInitializedAsync()
     {
         if(actions.apiService==null)
