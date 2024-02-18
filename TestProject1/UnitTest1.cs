@@ -41,6 +41,17 @@ public class UnitTest1
         var service = new ApiService(httpClient);
         var y = await service.Locations();
         int x = 0;
+    }
+    [Fact]
+    public async void PlayerOrderWorks()
+    {
+        using HttpClient httpClient = new HttpClient() { BaseAddress = new Uri("https://snowspacewars.azurewebsites.net/") };
+        var service = new ApiService(httpClient);
+        service.JoinGameAsync("whatever");
+        var x = await service.Locations();
+
+
+        var y = await service.Locations();
 
     }
 

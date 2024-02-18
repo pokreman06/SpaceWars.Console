@@ -24,8 +24,9 @@ public class ApiService
     public async Task<(int x, int y)[]> Locations()
     {
             var response = await _httpClient.GetAsync($"/Game/State");
-            var locals = System.Text.Json.JsonSerializer.Deserialize<state>(await response.Content.ReadAsStringAsync());
-            return locals.playerLocations;
+        var content = await response.Content.ReadAsStringAsync();
+            var locals = JsonConvert.DeserializeObject<state>(content);
+        return locals.playerLocations;
         
     }
 
@@ -42,9 +43,9 @@ public class ApiService
         {
             var response = await _httpClient.GetAsync($"/game/join?name={Uri.EscapeDataString(name)}");
             var locations = await Locations();
-            order = locations.Length;
 
             response.EnsureSuccessStatusCode(); // Throw an exception if the status code is not a success code
+            order = locations.Length;
 
             var content = await response.Content.ReadAsStringAsync();
             var result = JsonConvert.DeserializeObject<JoinGameResponse>(content);
