@@ -6,11 +6,11 @@ public enum Direction { Right, Left }
 
 public class GameActions
 {
-    private readonly JoinGameResponse joinGameResponse;
-    private readonly ApiService apiService;
+    private JoinGameResponse? joinGameResponse;
+    private ApiService? apiService;
     private int heading;
 
-    public GameActions(string playerName, JoinGameResponse joinGameResponse, ApiService apiService)
+    public void iGameActions(string playerName, JoinGameResponse joinGameResponse, ApiService apiService)
     {
         this.joinGameResponse = joinGameResponse;
         this.apiService = apiService;

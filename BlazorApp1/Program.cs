@@ -1,5 +1,6 @@
 using BlazorApp1.Components;
 using SpaceWarsServices;
+using SWConsole;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -7,6 +8,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
 builder.Services.AddSingleton<ApiService>(new ApiService());
+builder.Services.AddSingleton<GameActions>(new GameActions());
 
 var app = builder.Build();
 
