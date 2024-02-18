@@ -7,7 +7,10 @@
 <button @onclick="fire">fire </button>
 <button @onclick = "face">face</button>
 <button @onclick = "repair">repair</button>
-
+@foreach(string weapon in actions.Weapons)
+{
+    <p>@weapon</p>
+}
 
 
 
