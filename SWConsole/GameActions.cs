@@ -19,6 +19,10 @@ public class GameActions
     public async Task RotateLeftAsync(bool quickTurn) => await rotate(Direction.Left, quickTurn);
 
     public async Task RotateRightAsync(bool quickTurn) => await rotate(Direction.Right, quickTurn);
+    public async Task RotateToDirection(int heading)
+    {
+        await apiService.QueueAction([new("changeHeading", heading.ToString())]);
+    }
 
     private async Task rotate(Direction direction, bool quickTurn)
     {
@@ -42,13 +46,21 @@ public class GameActions
         await apiService.QueueAction(actions);
     }
 
-    public async Task FireWeaponAsync(string? weapon = null) => await apiService.QueueAction([new("fire", weapon ?? CurrentWeapon)]);
+    public async Task FireWeaponAsync(bool shiftPressed, string? weapon = null) {
+        int s = 1;
+        if (shiftPressed)
+            s = 10;
+        for (int x = 0; x<s; x++)
+        {
+            await apiService.QueueAction([new("fire", weapon ?? CurrentWeapon)]); }
+    }
 
     public async Task RepairShipAsync() => await apiService.QueueAction([new("repair", null)]);
 
     public async Task ClearQueueAsync() => await apiService.ClearAction();
 
     public async Task PurchaseItemAsync(string item) => await apiService.QueueAction([new("purchase", item)]);
+    public async Task Copy() => await apiService.copy();
 
     private static int ClampRotation(int degrees)
     {

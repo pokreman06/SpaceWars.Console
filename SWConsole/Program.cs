@@ -5,6 +5,7 @@ namespace SpaceWarsServices;
 
 class Program
 {
+    int loc;
     static async Task Main(string[] args)
     {
         //**************************************************************************************
@@ -21,6 +22,7 @@ class Program
         const ConsoleKey shopKey = ConsoleKey.S;
         const ConsoleKey repairKey = ConsoleKey.R;
         const ConsoleKey readAndEmptyMessagesKey = ConsoleKey.M;
+        const ConsoleKey clone = ConsoleKey.Q;
 
         Uri baseAddress = getApiBaseAddress(args);
         using HttpClient httpClient = new HttpClient() { BaseAddress = baseAddress };
@@ -65,6 +67,9 @@ class Program
                 case var key when key == forwardKey:
                     await gameActions.MoveForwardAsync(shiftPressed);
                     break;
+                case var key when key == clone:
+                    await gameActions.Copy();
+                    break;
                 case var key when key == leftKey:
                     await gameActions.RotateLeftAsync(shiftPressed);
                     break;
@@ -72,7 +77,7 @@ class Program
                     await gameActions.RotateRightAsync(shiftPressed);
                     break;
                 case var key when key == fireKey:
-                    await gameActions.FireWeaponAsync();
+                    await gameActions.FireWeaponAsync(shiftPressed);
                     break;
                 case var key when key == clearQueueKey:
                     await gameActions.ClearQueueAsync();
@@ -133,6 +138,7 @@ class Program
             Console.WriteLine($"Name: {username,-34} Token: {gameActions.Token}");
             Console.WriteLine($"Left: {leftKey,-12} Right: {rightKey,-12} Forward: {forwardKey,-12} Fire: {fireKey,-12} Clear Queue: {clearQueueKey,-12}");
             Console.WriteLine($"Info: {infoKey,-12}  Shop: {shopKey,-12}  Repair: {repairKey,-12} Read & Empty Messages: {readAndEmptyMessagesKey,-12}");
+            Console.WriteLine("player order" + service.order);
 
             for (int i = 0; i < gameActions.Weapons.Count; i++)
             {
@@ -149,6 +155,7 @@ class Program
             if (gameActions.GameMessages.Any())
             {
                 Console.WriteLine();
+                
                 Console.WriteLine("Last 10 messages:");
                 Console.WriteLine(new string('-', Console.WindowWidth));
                 foreach (var msg in gameActions.GameMessages.TakeLast(10))
