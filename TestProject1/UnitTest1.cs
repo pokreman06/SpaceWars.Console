@@ -26,7 +26,7 @@ public class UnitTest1
     public void FindNearestPlayerReturnsNearest() 
     {
         var test = new Logic();
-        Assert.Equal(test.findNearestPlayer(new (int, int)[] {(0,0),(1,1),(1,0) }, 0), (1, 0));
+        Assert.Equal(test.findNearestPlayer(new (int, int)[] {(0,0),(1,1),(1,0) }, 1), (1, 0));
     }
     [Fact]
     public void findHeadingworks()
@@ -53,6 +53,15 @@ public class UnitTest1
 
         var y = await service.Locations();
 
+    }
+    [Fact]
+    public async void testPointToPlayer()
+    {
+        using HttpClient httpClient = new HttpClient() { BaseAddress = new Uri("https://snowspacewars.azurewebsites.net/") };
+        var service = new ApiService(httpClient);
+        var x = await service.JoinGameAsync("whatever");
+        var actions = new GameActions("whatever", x, service);
+        await actions.faceNearestPlayer();
     }
 
 

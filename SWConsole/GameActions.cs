@@ -1,4 +1,5 @@
 ﻿using SpaceWarsServices;
+using System;
 
 namespace SWConsole;
 public enum Direction { Right, Left }
@@ -69,11 +70,15 @@ public class GameActions
             degrees += 360;
         return degrees;
     }
-    internal async Task faceNearestPlayer()
+    public async Task faceNearestPlayer()
     {
-
+        var temp = new Logic();
+        var locations = await apiService.Locations();
+        var x = temp.findNearestPlayer(locations, apiService.order);
+        var heading = temp.FindHeading(x, locations[apiService.order-1]);
+        await apiService.QueueAction(new QueueActionRequest[] { new QueueActionRequest("move", heading.ToString()) });
     }
-    internal async Task ReadAndEmptyMessagesAsync()
+    internal async Task ReadAQndEmptyMessagesAsync()
     {
         var messages = await apiService.ReadAndEmptyMessages();
         GameMessages.AddRange(messages);

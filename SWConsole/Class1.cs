@@ -19,13 +19,13 @@ public class Logic
         for (var i = 0; i<players.Length; i++)
         {
 
-            if(i!=Order)
+            if(i!=Order-1)
             {
                 x[y]=players[i];
                 y++;
             }
         }
-        (int,int) bas = players[Order];
+        (int,int) bas = players[Order-1];
         double? smallest = null;
         (int, int) small = (0,0);
         foreach((int, int) player in x)

@@ -22,7 +22,7 @@ class Program
         const ConsoleKey shopKey = ConsoleKey.S;
         const ConsoleKey repairKey = ConsoleKey.R;
         const ConsoleKey readAndEmptyMessagesKey = ConsoleKey.M;
-        const ConsoleKey clone = ConsoleKey.Q;
+        const ConsoleKey face = ConsoleKey.Q;
 
         Uri baseAddress = getApiBaseAddress(args);
         using HttpClient httpClient = new HttpClient() { BaseAddress = baseAddress };
@@ -67,8 +67,8 @@ class Program
                 case var key when key == forwardKey:
                     await gameActions.MoveForwardAsync(shiftPressed);
                     break;
-                case var key when key == clone:
-                    await gameActions.Copy();
+                case var key when key == face:
+                    await gameActions.faceNearestPlayer();
                     break;
                 case var key when key == leftKey:
                     await gameActions.RotateLeftAsync(shiftPressed);
