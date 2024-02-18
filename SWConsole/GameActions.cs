@@ -80,7 +80,6 @@ public class GameActions
             Weapons.Add(weaponPurchaseMessage.Message);
         }
     }
-
     internal void SelectWeapon(ConsoleKey key)
     {
         char c = (char)key;

@@ -46,5 +46,14 @@ public Double CalcDistance((int x, int y) x,(int x, int y) y)
     int n = nnx + nny;
     return Math.Sqrt(n);
 }
+public int FindHeading((int x, int y) first, (int x, int y) second)
+    {
+        second.x = second.x - first.x;
+        second.y = second.y - first.y;
+        double distance = CalcDistance((0,0), second);
+        return (int)(Math.Acos(second.x/distance)*180/Math.PI);
+
+
+    }
 
 }

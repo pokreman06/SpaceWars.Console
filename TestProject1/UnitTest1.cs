@@ -1,3 +1,5 @@
+using System.Security.Cryptography.X509Certificates;
+
 namespace TestProject1;
 
 
@@ -23,5 +25,11 @@ public class UnitTest1
     {
         var test = new Logic();
         Assert.Equal(test.findNearestPlayer(new (int, int)[] {(0,0),(1,1),(1,0) }, 0), (1, 0));
+    }
+    [Fact]
+    public void findHeadingworks()
+    {
+        var test = new Logic();
+        Assert.Equal(90, test.FindHeading((0, 0), (0, 1)));
     }
 }
