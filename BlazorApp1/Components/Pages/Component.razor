@@ -1,5 +1,30 @@
-﻿<h3>ui</h3>
+﻿@using SpaceWarsServices
+@using SWConsole
+@inject ApiService service
+@inject GameActions actions
+<h3>ui</h3>
+
+
+
+
+
+
+
+
+
+
+
+
 
 @code {
+    
+    protected override async Task OnInitializedAsync()
+    {
+        if(actions.apiService==null)
+        {
+            actions.apiService = service;
+            actions.joinGameResponse = await service.JoinGameAsync("");
 
+        }
+    }
 }

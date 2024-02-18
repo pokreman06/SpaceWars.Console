@@ -6,8 +6,8 @@ public enum Direction { Right, Left }
 
 public class GameActions
 {
-    private JoinGameResponse? joinGameResponse;
-    private ApiService? apiService;
+    public JoinGameResponse? joinGameResponse;
+    public ApiService? apiService;
     private int heading;
 
     public void iGameActions(string playerName, JoinGameResponse joinGameResponse, ApiService apiService)
