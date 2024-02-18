@@ -62,7 +62,7 @@ public class GameActions
 
     public async Task PurchaseItemAsync(string item) => await apiService.QueueAction([new("purchase", item)]);
     public async Task PurchasePowerFistAsync() => await apiService.QueueAction([new("purchase", "Power Fist")]);
-   // public async Task PurchaseRailGunAsync() => await apiService.QueueAction([new("purchase", "Rail Gun")]);
+    public async Task PurchaseRailGunAsync() => await apiService.QueueAction([new("purchase", "Rail Gun")]);
     public async Task Copy() => await apiService.copy();
 
     private static int ClampRotation(int degrees)
