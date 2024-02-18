@@ -11,9 +11,11 @@ public class ApiService
     public int order;
     public int heading;
 
-    public ApiService(HttpClient httpClient)
+    public ApiService()
     {
+        using HttpClient httpClient = new HttpClient() { BaseAddress = new Uri("https://snowspacewars.azurewebsites.net/") };
         _httpClient = httpClient ?? throw new ArgumentNullException(nameof(httpClient));
+        token = "";
     }
     private class state
     {

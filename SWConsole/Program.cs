@@ -23,13 +23,15 @@ class Program
         const ConsoleKey repairKey = ConsoleKey.R;
         const ConsoleKey readAndEmptyMessagesKey = ConsoleKey.M;
         const ConsoleKey face = ConsoleKey.Q;
+        const ConsoleKey powerfist = ConsoleKey.Z;
+        const ConsoleKey railgun = ConsoleKey.X;
 
         Uri baseAddress = getApiBaseAddress(args);
-        using HttpClient httpClient = new HttpClient() { BaseAddress = baseAddress };
+        
         bool exitGame = false;
         var currentHeading = 0;
         var token = "";
-        var service = new ApiService(httpClient);
+        var service = new ApiService();
         List<PurchasableItem> Shop = new List<PurchasableItem>();
         JoinGameResponse joinGameResponse = null;
 
@@ -64,6 +66,12 @@ class Program
 
             switch (keyInfo.Key)
             {
+                case var key when key == powerfist:
+                  await gameActions.PurchaseItemAsync("Power Fist");
+                    break;
+                    case var key when key == railgun:
+                  await gameActions.PurchaseItemAsync("Rail Gun");
+                    break;
                 case var key when key == forwardKey:
                     await gameActions.MoveForwardAsync(shiftPressed);
                     break;

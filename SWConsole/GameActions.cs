@@ -61,6 +61,8 @@ public class GameActions
     public async Task ClearQueueAsync() => await apiService.ClearAction();
 
     public async Task PurchaseItemAsync(string item) => await apiService.QueueAction([new("purchase", item)]);
+    public async Task PurchasePowerFistAsync() => await apiService.QueueAction([new("purchase", "Power Fist")]);
+   // public async Task PurchaseRailGunAsync() => await apiService.QueueAction([new("purchase", "Rail Gun")]);
     public async Task Copy() => await apiService.copy();
 
     private static int ClampRotation(int degrees)
@@ -75,10 +77,11 @@ public class GameActions
         var temp = new Logic();
         var locations = await apiService.Locations();
         var x = temp.findNearestPlayer(locations, apiService.order);
-        var heading = temp.FindHeading(x, locations[apiService.order-1]);
-        await apiService.QueueAction(new QueueActionRequest[] { new QueueActionRequest("move", heading.ToString()) });
+        var _heading = ClampRotation(temp.FindHeading(x, locations[apiService.order-1]));
+        heading = _heading;
+        await apiService.QueueAction([new("changeHeading", _heading.ToString())]);
     }
-    internal async Task ReadAQndEmptyMessagesAsync()
+    internal async Task ReadAndEmptyMessagesAsync()
     {
         var messages = await apiService.ReadAndEmptyMessages();
         GameMessages.AddRange(messages);
