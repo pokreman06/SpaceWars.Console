@@ -69,7 +69,10 @@ public class GameActions
             degrees += 360;
         return degrees;
     }
+    internal async Task faceNearestPlayer()
+    {
 
+    }
     internal async Task ReadAndEmptyMessagesAsync()
     {
         var messages = await apiService.ReadAndEmptyMessages();

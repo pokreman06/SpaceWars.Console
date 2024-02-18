@@ -23,16 +23,10 @@ public class ApiService
 
     public async Task<(int x, int y)[]> Locations()
     {
-        try
-        {
             var response = await _httpClient.GetAsync($"/Game/State");
-            var locals = System.Text.Json.JsonSerializer.Deserialize<state>(response.ToString());
+            var locals = System.Text.Json.JsonSerializer.Deserialize<state>(await response.Content.ReadAsStringAsync());
             return locals.playerLocations;
-        }
-        catch 
-        {
-            throw;
-        }
+        
     }
 
     public async Task copy()

@@ -1,4 +1,6 @@
+using SpaceWarsServices;
 using System.Security.Cryptography.X509Certificates;
+using static System.Net.WebRequestMethods;
 
 namespace TestProject1;
 
@@ -32,4 +34,15 @@ public class UnitTest1
         var test = new Logic();
         Assert.Equal(90, test.FindHeading((0, 0), (0, 1)));
     }
+    [Fact]
+    public async void GetListOfPlayers()
+    {
+        using HttpClient httpClient = new HttpClient() { BaseAddress = new Uri("https://snowspacewars.azurewebsites.net/") };
+        var service = new ApiService(httpClient);
+        var y = await service.Locations();
+        int x = 0;
+
+    }
+
+
 }
