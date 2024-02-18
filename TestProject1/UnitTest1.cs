@@ -18,10 +18,10 @@ public class UnitTest1
 
 
     }
-    //[Fact]
-    //public void FindNearestPlayerReturnsNearest() 
-   // {
-      //  var test = new Logic();
-   //     Assert.Equal(test.findNearestPlayer(new (int, int)[] {(0,0),(1,1),(1,0) }, 0), (1, 0));
- //   }
+    [Fact]
+    public void FindNearestPlayerReturnsNearest() 
+    {
+        var test = new Logic();
+        Assert.Equal(test.findNearestPlayer(new (int, int)[] {(0,0),(1,1),(1,0) }, 0), (1, 0));
+    }
 }
